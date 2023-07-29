@@ -2,6 +2,9 @@ class Solution {
     public boolean isValid(String s) {
         Stack<Character> myStack = new Stack<>();
 
+        if (s.length() % 2 != 0)
+            return false;
+
         for (char c : s.toCharArray()) {
             if (myStack.size() == 0 || "({[".indexOf(c) != -1)
                 myStack.push(c);
