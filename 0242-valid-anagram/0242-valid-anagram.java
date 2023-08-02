@@ -1,19 +1,26 @@
+import java.util.Hashtable;
+
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()) return false;
+        int sl = s.length();
+        int tl = t.length();
 
-        List<Character> a = new ArrayList<>();
+        if (sl != tl) return false;
 
-        for (char c : s.toCharArray()) {
-            a.add(c);
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < sl; i++) {
+            Character sc = s.charAt(i);
+            Character tc = t.charAt(i);
+
+            map.put(sc, map.getOrDefault(sc, 0) + 1);
+            map.put(tc, map.getOrDefault(tc, 0) - 1);
         } // for
 
-        for (Character c : t.toCharArray()) {
-            if (a.indexOf(c) == -1)
+        for (int i : map.values())
+            if ( i != 0 )
                 return false;
-            a.remove(c);
-        }
-
+        
         return true;
-    }
-}
+    } // isAnagram
+} // Solution
