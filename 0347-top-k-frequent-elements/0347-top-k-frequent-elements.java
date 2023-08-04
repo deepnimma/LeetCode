@@ -20,7 +20,7 @@ class Solution {
 
     int getMostFrequent(Map<Integer, Integer> map) {
         int mostFrequent = Integer.MIN_VALUE;
-        int freq = Integer.MIN_VALUE;
+        int freq = -1;
 
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             if (entry.getValue() > freq) {
