@@ -1,30 +1,31 @@
 class Solution {
     public boolean isValid(String s) {
-        Stack<Character> myStack = new Stack<>();
+        Stack<Character> st = new Stack<>();
+        char[] c = s.toCharArray();
 
-        if (s.length() % 2 != 0)
-            return false;
-
-        for (char c : s.toCharArray()) {
-            if (myStack.size() == 0 || "({[".indexOf(c) != -1)
-                myStack.push(c);
+        for (char b : c) {
+            if (checkOpenBracket(b)) st.push(b);
             else {
-                if(!checkBracket(myStack.pop(), c))
-                   return false;
-            }  // if-else
-        } // FOR
+                if (!checkBrackets(st.pop(), b)) return false;
+            } // if-else
+        } // for
 
-        if (myStack.size() != 0)
-            return false;
-
-        return true;
+        return st.empty();
     } // isValid
 
-    private boolean checkBracket(char a, char b) {
-        if ((a == '(' && b == ')') ||
-        (a == '[' && b == ']') ||
-        (a == '{' && b == '}'))
-            return true;
-        return false;
-    } // checkBracket
+    private boolean checkBrackets(char a, char b) {
+        boolean paran = (a == '(') && (b == ')');
+        boolean square = (a == '[') && (b == ']');
+        boolean curly = (a == '{') && (b == '}');
+
+        return paran || square || curly;
+    } // checkBrackets
+
+    private boolean checkOpenBracket(char a) {
+        boolean paran = (a == '(');
+        boolean square = (a == '[');
+        boolean curly = (a == '{');
+        
+        return paran || square || curly;
+    } // checkOpenBracket
 } // Solution
