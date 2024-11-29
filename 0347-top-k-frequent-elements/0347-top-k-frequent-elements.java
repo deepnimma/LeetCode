@@ -1,34 +1,31 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> cnt = new HashMap<>();
 
         for (int i : nums) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
+            cnt.put(i, cnt.getOrDefault(i, 0) + 1);
         } // for
 
-        int[] a = new int[k];
+        int[] freq = new int[k];
 
         for (int i = 0; i < k; i++) {
-            a[i] = getMostFrequent(map);
-            map.replace(a[i], -1);
+            freq[i] = getMostFreqElement(nums, cnt);
         } // for
 
-        System.out.println(map.values());
-     
-        return a;
+        return freq;
     } // topKFrequent
 
-    int getMostFrequent(Map<Integer, Integer> map) {
-        int mostFrequent = Integer.MIN_VALUE;
-        int freq = -1;
-
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (entry.getValue() > freq) {
-                mostFrequent = entry.getKey();
-                freq = entry.getValue();
+    private int getMostFreqElement(int[] nums, Map<Integer, Integer> map) {
+        int curr = -1, currcnt = -1;
+        for (int i : nums) {
+            if (map.get(i) > currcnt) {
+                curr = i;
+                currcnt = map.get(i);
             } // if
         } // for
 
-        return mostFrequent;
-    }
+        map.put(curr, -1);
+
+        return curr;
+    } // for
 } // Solution
