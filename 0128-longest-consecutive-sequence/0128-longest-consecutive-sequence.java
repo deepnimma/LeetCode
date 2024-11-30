@@ -1,29 +1,46 @@
 class Solution {
     public int longestConsecutive(int[] nums) {
-        if (nums.length == 0 || nums.length == 1)
-            return nums.length;
+        int n = nums.length;
 
+        if (n == 0 || n == 1) return n;
+
+        nums = removeDups(nums);
         Arrays.sort(nums);
 
-        int count = 1;
-        int maxCount = 1;
+        n = nums.length;
 
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i + 1] == nums[i])
-                continue;
+        int currMax = 1;
+        int i = 0, j = 1;
+        int diff = -1, rem = 0;
 
-            if (nums[i + 1] - nums[i] == 1) {
-                count++;
+        while (j < n) {
+            diff = (nums[j] - nums[i]) / (j - i);
+            rem = (nums[j] - nums[i]) % (j - i);
 
-                if (i + 1 >= nums.length - 1)
-                    return Math.max(maxCount, count);
-            } else {
-                count = 1;
-            } // if-else
+            if (diff == 1 && rem == 0) {
+                currMax = Math.max(currMax, j - i + 1);
+            } else i++;
 
-            maxCount = Math.max(maxCount, count);
+            j++;
+        } // while
+
+        return currMax;
+    } // longestConsecutive
+
+    private int[] removeDups(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+
+        for (int i : nums) {
+            if (!s.contains(i)) s.add(i);
         } // for
 
-        return maxCount;
-    } // longestConsecutive
+        int[] n = new int[s.size()];
+        int r = 0;
+
+        for (int i : s) {
+            n[r++] = i;
+        } // for
+
+        return n;
+    } // removeDups
 } // Solution
