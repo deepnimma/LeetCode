@@ -4,8 +4,8 @@ class Solution {
         int prof = 0;
 
         for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < min) min = prices[i];
-            else if (prices[i] - min > prof) prof = prices[i] - min;
+            min = Math.min(min, prices[i]);
+            prof = Math.max(prof, prices[i] - min);
         } // for
 
         return prof;
