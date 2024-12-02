@@ -22,7 +22,7 @@ class Solution {
         if (root == null) return 0;
         else if (root.children.isEmpty()) return 1;
         else {
-            List<Integer> heights = new LinkedList<>();
+            List<Integer> heights = new ArrayList<>();
             for (Node item : root.children) {
                 heights.add(maxDepth(item));
             } // for
