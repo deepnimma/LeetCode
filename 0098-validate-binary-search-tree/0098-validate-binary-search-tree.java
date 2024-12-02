@@ -22,7 +22,6 @@ class Solution {
         dfs(root);
         int prev = nums.poll();
         while (!nums.isEmpty()) {
-            System.out.println(prev + " " + nums.peek());
             if (nums.element() <= prev) return false;
             prev = nums.poll();
         } // while
