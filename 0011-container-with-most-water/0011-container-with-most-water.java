@@ -11,7 +11,7 @@ class Solution {
             if (height[i] == height[j]) {
                 i++;
                 j--;
-            } else if (Math.min(height[i], height[j]) == height[i]) {
+            } else if (height[i] <= height[j]) {
                 i++;
             } else {
                 j--;
